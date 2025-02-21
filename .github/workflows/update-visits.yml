@@ -1,0 +1,31 @@
+name: Update Visit Count
+
+on:
+  push:
+    branches:
+      - main  # تحديد الفرع الذي تريد تتبع الزيارات فيه
+
+jobs:
+  update-visit-count:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Increment visit count
+        run: |
+          # قراءة ملف JSON
+          FILE="visits.json"
+          VISITS=$(jq '.visits' $FILE)
+          NEW_VISITS=$((VISITS + 1))
+
+          # زيادة العدد
+          jq ".visits = $NEW_VISITS" $FILE > temp.json && mv temp.json $FILE
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "Your Name"
+          git config --global user.email "your-email@example.com"
+          git add visits.json
+          git commit -m "Update visit count"
+          git push
