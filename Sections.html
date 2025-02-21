@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Dentistry Student</title>
+  <!-- SweetAlert2 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Custom CSS for iOS design -->
+  <style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  	@import url("https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap");
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+:root {
+  --c-white: #fff;
+  --c-black: #000;
+  --c-ash: #eaeef6;
+  --c-charcoal: #a0a0a0;
+  --c-void: #141b22;
+  --c-fair-pink: #FFEDEC;
+  --c-apricot: #FBC8BE;
+  --c-coffee: #754D42;
+  --c-del-rio: #917072;
+  --c-java: #1FCAC5;
+  --c-titan-white: #f1eeff;
+  --c-cold-purple: #a69fd6;
+  --c-indigo: #6558d3;
+  --c-governor: #4133B7;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+
+  font-size: 12px;
+  line-height: 1.5;
+  min-height: 100%;
+  background-color: var(--c-ash);
+  user-select: none; /* For most modern browsers */
+            -webkit-user-select: none; /* For Chrome, Safari, and Opera */
+            -moz-user-select: none; /* For Firefox */
+            -ms-user-select: none; 
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2.5rem;
+  width: 90%;
+  max-width: 1000px;
+  margin: 10vh auto;
+  font-size: 15px;
+  font-family: 'Cairo', sans-serif;
+
+}
+
+.card {
+  border-radius: 16px;
+  box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
+  max-width: 300px;
+  font-size: 15px;
+  font-family: 'Cairo', sans-serif;
+
+
+}
+
+.information {
+  background-color: var(--c-white);
+  padding: 1.5rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.information .tag {
+  display: inline-block;
+  background-color: var(--c-titan-white);
+  color: var(--c-indigo);
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.5em 0.75em;
+  line-height: 1;
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: 'Cairo', sans-serif;
+
+
+}
+.information .tag + * {
+  margin-top: 1rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.information .title {
+  font-size: 1.5rem;
+  color: var(--c-void);
+  line-height: 1.25;
+  font-family: 'Cairo', sans-serif;
+
+}
+.information .title + * {
+  margin-top: 1rem;
+  font-size: 10px;
+  font-family: 'Cairo', sans-serif;
+
+}
+.information .info {
+  color: var(--c-charcoal);
+  font-family: 'Cairo', sans-serif;
+
+}
+.information .info + * {
+  margin-top: 1.25rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.span{
+  direction: rtl;
+  animation-direction: alternate-reverse;
+
+}
+.information .button {
+  font-family: 'Cairo', sans-serif;
+  line-height: 1;
+  background-color: var(--c-white);
+  border: 2px solid var(--c-indigo);
+  color: var(--c-indigo);
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.information .button:hover, .information .button:focus {
+  background-color: var(--c-indigo);
+  font-family: 'Cairo', sans-serif;
+
+  color: var(--c-white);
+}
+.information .details {
+  display: flex;
+  font-family: 'Cairo', sans-serif;
+
+  gap: 1rem;
+}
+.information .details div {
+  padding: 0.75em 1em;
+  background-color: var(--c-titan-white);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.125em;
+  font-family: 'Cairo', sans-serif;
+
+  flex-basis: 50%;
+}
+.information .details dt {
+  font-size: 0.875rem;
+  color: var(--c-cold-purple);
+  font-family: 'Cairo', sans-serif;
+
+}
+.information .details dd {
+  color: var(--c-indigo);
+  font-weight: 600;
+  font-size: 1.25rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+
+.plan {
+  padding: 10px;
+  background-color: var(--c-white);
+  font-family: 'Cairo', sans-serif;
+
+  color: var(--c-del-rio);
+}
+.plan strong {
+  font-weight: 600;
+  color: var(--c-coffee);
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .inner {
+  padding: 20px;
+  padding-top: 40px;
+  background-color: var(--c-fair-pink);
+  font-family: 'Cairo', sans-serif;
+
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.plan .pricing {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--c-apricot);
+  border-radius: 99em 0 0 99em;
+  display: flex;
+  align-items: center;
+  padding: 0.625em 0.75em;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--c-coffee);
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .pricing small {
+  color: var(--c-del-rio);
+  font-size: 0.75em;
+  margin-left: 0.25em;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .title {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--c-coffee);
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .title + * {
+  margin-top: 0.75rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .info + * {
+  margin-top: 1rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .features {
+  display: flex;
+  font-family: 'Cairo', sans-serif;
+
+  flex-direction: column;
+}
+.plan .features li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .features li + * {
+  margin-top: 0.75rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .features .icon {
+  background-color: var(--c-java);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-white);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .features .icon svg {
+  width: 14px;
+  height: 14px;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .features + * {
+  margin-top: 1.25rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan button {
+  font: inherit;
+  background-color: var(--c-indigo);
+  border-radius: 6px;
+  color: var(--c-white);
+  font-weight: 500;
+  font-size: 1.125rem;
+  width: 100%;
+  border: 0;
+  padding: 1em;
+  font-family: 'Cairo', sans-serif;
+  text-decoration: none;
+
+}
+.plan button:hover, .plan button:focus {
+  background-color: var(--c-governor);
+  font-family: 'Cairo', sans-serif;
+
+}
+    .swal2-popup {
+      font-family: 'Cairo', sans-serif;
+      font-size: 16px;
+      border-radius: 10px;
+      background-color: #f3f3f3;
+      color: #000;
+      width: 80%; /* Adjust width as needed */
+    }
+    .swal2-title {
+      font-family: 'Cairo', sans-serif;
+
+      font-weight: bold;
+      font-size: 20px;
+      color: #4133B7; /* Blue color for title */
+    }
+    .swal2-content {
+      font-size: 16px;
+      color: #333;
+      font-family: 'Cairo', sans-serif;
+
+    }
+    .swal2-actions {
+      display: flex;
+      flex-direction: column; /* Display actions in column */
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      font-family: 'Cairo', sans-serif;
+
+    }
+    .swal2-cancel {
+      background-color: #e5e5ea;
+      color: #333;
+      padding: 10px 20px;
+      border-radius: 8px;
+      width: 100%; /* Make cancel button full width */
+      font-family: 'Cairo', sans-serif;
+
+    }
+    .swal2-confirm {
+      background-color: #4133B7;
+      font-family: 'Cairo', sans-serif;
+
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      width: 100%; /* Make confirm button full width */
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+        /* إخفاء العنصر بشكل افتراضي */
+        
+
+
+
+
+  </style>
+</head>
+<body>
+  
+<div class="cards">
+	<article class="information card" id="p11Card1">
+    <span class="tag">شؤون مالية  و أكاديمية</span>
+    <h3 class="title">لا تفوت اجتماعاتك الهامة أبدًا</h3>
+        <p id="وصف4">وصف الصفحة هنا</p>
+    <button id="زرالقائمة4" class="button" onclick="انتقالإلىصفحة()">
+        <span>معرفة المزيد</span>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z" fill="currentColor"/>
+        </svg>
+    </button>
+</article>
+
+<script>
+function انتقالإلىصفحة() {
+    window.location.href = "11.html"; // هنا يمكنك وضع عنوان الصفحة المرغوب
+}
+</script>
+
+<article class="information card" id="p11Card1">
+    <span class="tag"> شؤون مالية </span>
+    <h3 class="title"> التحويل للحساب الجامعي </h3>
+    <p id="وصف4"> ستجد في هذا القسم طرق الدفع المتوفرة مع شرح تفصيلي عن طريقة إجرائها</p>
+    <button id="زرالقائمة4" class="button" onclick="إظهارتنبيه()">
+        <span>معرفة المزيد</span>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z" fill="currentColor"/>
+        </svg>
+    </button>
+</article>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function إظهارتنبيه() {
+    Swal.fire({
+        title: 'يتم العمل على هذا القسم!',
+        text: 'هذا القسم تحت التطوير، الرجاء العودة لاحقًا.',
+        icon: 'info',
+        confirmButtonText: 'حسنًا'
+    });
+}
+</script>
+
+
+<article class="information card" id="p11Card1">
+    <span class="tag">شؤون أكاديمية</span>
+    <h3 class="title">الإنذارات الجامعية</h3>
+    <p id="وصف4">ستجد في هذا القسم شرح مفصل عن الإنذارات الجامعية ومثال شامل بالإضافة إلى برمجية لحساب الإنذارات الخاصة بالطالب</p>
+    <button id="زرالقائمة4" class="button" onclick="إظهارتنبيه()">
+        <span>معرفة المزيد</span>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z" fill="currentColor"/>
+        </svg>
+    </button>
+</article>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function إظهارتنبيه() {
+    Swal.fire({
+        title: 'يتم العمل على هذا القسم!',
+        text: 'هذا القسم تحت التطوير، الرجاء العودة لاحقًا.',
+        icon: 'info',
+        confirmButtonText: 'حسنًا'
+    });
+}
+</script>
+
+
+  </div>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- SweetAlert2 JS -->
+  
+<!-- <script src="update.js"></script> -->
+</body>
+    </html>
