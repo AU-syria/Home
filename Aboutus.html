@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة البروفايل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-card {
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: var(--delay);
+        }
+
+        .profile-card.visible {
+            opacity: 1;
+        }   
+        
+        body {
+            user-select: none; /* For most modern browsers */
+            -webkit-user-select: none; /* For Chrome, Safari, and Opera */
+            -moz-user-select: none; /* For Firefox */
+            -ms-user-select: none; /* For Internet Explorer and Edge */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .profile-card {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            transition: transform 0.3s ease;
+            margin-bottom: 20px; /* أضف مسافة بين البطاقات */
+        }
+
+        .profile-card:first-of-type {
+            margin-top: 40px; /* أبعد أول بطاقة عن الرأس مسافة 10px */
+        }
+
+        .profile-card:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-card img:hover {
+            transform: scale(1.1);
+        }
+
+        .profile-card h1 {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .profile-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+        }
+
+        .social-icons i {
+            font-size: 30px;
+            color: #333;
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons i:hover {
+            transform: scale(1.2);
+        }
+
+        .social-icons .fa-twitter {
+            color: #1DA1F2;
+        }
+
+        .social-icons .fa-facebook {
+            color: #1877F2;
+        }
+
+        .social-icons .fa-instagram {
+            color: #E1306C;
+        }
+
+        .social-icons .fa-linkedin {
+            color: #0A66C2;
+        }
+
+        .social-icons .fa-github {
+            color: #333;
+        }
+
+        .social-icons .fa-twitter:hover {
+            color: #0d8bdb;
+        }
+
+        .social-icons .fa-facebook:hover {
+            color: #155db2;
+        }
+
+        .social-icons .fa-instagram:hover {
+            color: #c7205d;
+        }
+
+        .social-icons .fa-linkedin:hover {
+            color: #084a8e;
+        }
+
+        .social-icons .fa-github:hover {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        <img id="profile-picture" src="https://randomuser.me/api/portraits/men/1.jpg" alt="صورة الملف الشخصي">
+        <h1>أيهم رياض حمشدو</h1>
+        <h3>المصمم و المطور</h3>
+        <p>طبيب أسنان</p>
+        <div class="social-icons" id="social-icons">
+            <!-- روابط الأيقونات سيتم إنشاؤها هنا -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        function showRandomImage() {
+            fetch('https://randomuser.me/api/')
+                .then(response => response.json())
+                .then(data => {
+                    const imageUrl = data.results[0].picture.large;
+                    document.getElementById('profile-picture').src = imageUrl;
+                })
+                .catch(error => {
+                    console.error('حدث خطأ في تحميل الصورة:', error);
+                });
+        }
+
+        function showAlert(socialMedia) {
+            Swal.fire({
+                title: `تم النقر على ${socialMedia}`,
+                icon: 'info',
+                confirmButtonText: 'موافق'
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const socialMediaLinks = {
+                Twitter: "https://twitter.sscom/yourprofile",
+                Facebook: "https://facebook.com/yourprofile",
+                Instagram: "https://instagram.com/yourprddofile",
+                LinkedIn: "https://linkedin.com/yourprofile",
+                GitHub: "https://www.google.com/"
+            };
+
+            const socialIconsContainer = document.getElementById('social-icons');
+
+            for (const [platform, url] of Object.entries(socialMediaLinks)) {
+                const anchor = document.createElement('a');
+                anchor.href = url;
+                anchor.onclick = () => showAlert(platform);
+                anchor.innerHTML = `<i class="fab fa-${platform.toLowerCase()}"></i>`;
+                socialIconsContainer.appendChild(anchor);
+            }
+
+            const cards = document.querySelectorAll('.profile-card');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach((card, index) => {
+                card.style.setProperty('--delay', `${index * 0.5}s`);
+                observer.observe(card);
+            });
+        });
+
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+    </script>
+    
+    <script src="js/aboutus.js"></script>
+</body>
+</html>
