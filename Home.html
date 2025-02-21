@@ -6,6 +6,7 @@
   <title>مربع استدعاء المعلومات</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     body {
       margin: 0;
@@ -81,6 +82,21 @@
       background-color: #ddd; /* لون الخلفية عند النقر */
       transform: scale(1.05); /* تكبير طفيف عند النقر */
     }
+    .purple-text {
+      color: #4133B7; /* اللون البنفسجي */
+      margin-top: 10px;
+      display: block; /* جعل النص يظهر في سطر جديد */
+      cursor: pointer;
+      text-decoration: none; /* إزالة الخط السفلي */
+    }
+    .purple-text:hover {
+      text-decoration: underline; /* إضافة خط تحت النص عند التمرير */
+    }
+    .scrollable {
+      max-height: 150px; /* ارتفاع أقصى */
+      overflow-y: auto; /* تمكين التمرير العمودي */
+      margin-top: 10px; /* مسافة فوق النص */
+    }
     @media (min-width: 576px) {
       p, ul {
         width: 75%;
@@ -96,17 +112,49 @@
 <body oncontextmenu="return false;"> <!-- منع القائمة المنبثقة -->
 <div class="container">
   <p class="info">إن هذا الموقع لا علاقة له باتحاد الطلبة ولا جامعة الأندلس، وهو مأخوذ من كافة المصادر الرسمية.</p>
-  <ul class="tldr">
-    <li><a href="#link1">النقطة الأولى المهمة.</a></li>
-    <li><a href="#link2">النقطة الثانية المهمة.</a></li>
-    <li><a href="#link3">النقطة الثالثة المهمة.</a></li>
-  </ul>
+  <ul class="tldr" id="tldr-list"></ul>
   <div class="footer">
     <a href="https://codepen.io/Ian-Waldron" target="_blank">Designed</a> By <a href="https://ianwaldron.com" target="_blank">Dr Ayham Hamchado</a>
   </div>
 </div>
+
 <script>
-  const tldrContent = '<i class="fa fa-bolt"></i>أحدث الإعلانات:';
+  // مصفوفة تحتوي على النقاط والروابط والعناوين الفرعية
+  const tldrData = [
+    { text: "النقطة الأولى المهمة.", subtitle: "تفسير النقطة الأولى. تفسير النقطة الأولى. تفسير النقطة الأولى. تفسير النقطة الأولى.", link: "https://example.com/link1" },
+    { text: "النقطة الثانية المهمة.", subtitle: "تفسير النقامنع اللون الازرق من الظهور مع النقر و اضف انيميشن للنقرامنع اللون الازرق من الظهور مع النقر و اضف انيميشن للنقرامنع اللون الازرق من الظهور مع النقر و اضف انيميشن للنقرامنع اللون الازرق من الظهور مع النقر و اضف انيميشن للنقرامنع اللون الازرق من الظهور مع النقر و اضف انيميشن للنقرطة الثانية. تفسير النقطة الثانية. تفسير النقطة الثانية.", link: "https://example.com/link2" },
+    { text: "النقطة الثالثة المهمة.", subtitle: "يبدأ الايداع حتر تاريخ 19/9/202", link: "https://example.com/link3" }
+  ];
+
+  // تحديد عنصر القائمة
+  const tldrList = document.getElementById('tldr-list');
+
+  // إضافة العناصر الديناميكية بناءً على المصفوفة
+  tldrData.forEach(item => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = item.link;
+    a.textContent = item.text;
+    a.addEventListener('click', (e) => {
+      e.preventDefault(); // منع التوجه للرابط
+
+      // إظهار تنبيه SweetAlert2
+      Swal.fire({
+        title: item.text,
+        html: `
+          <div class="scrollable">${item.subtitle}</div>
+          <span class="purple-text" onclick="window.open('${item.link}', '_blank')">قراءة الإعلان</span>
+        `,
+        showCloseButton: true,
+        confirmButtonText: 'خروج',
+        confirmButtonColor: '#4133B7', // تغيير لون الزر إلى البنفسجي
+      });
+    });
+    li.appendChild(a);
+    tldrList.appendChild(li);
+  });
+
+  const tldrContent = '<i class="fa fa-bolt"></i>TLDR:';
   const infoContent = '<i class="fa fa-info-circle"></i>معلومات:';
 
   const targets = document.querySelectorAll('.tldr, .info');
