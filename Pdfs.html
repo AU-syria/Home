@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أهم الروابط - تحميل ملفات PDF</title>
+    <!-- Font Awesome for PDF icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- CSS Styles -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+            user-select: none;
+            text-align: center;
+        }
+
+        .container {
+            margin: 50px auto;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .container h2 {
+            font-size: 24px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+
+        .container h2 i {
+            margin-left: 8px;
+        }
+
+        .underline {
+            border-bottom: 3px solid #d6a2e8;
+            width: 100px;
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #d6a2e8;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 10px auto;
+            width: 250px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn i {
+            margin-left: 8px;
+            font-size: 20px;
+        }
+
+        .btn:hover {
+            background-color: #b593d6;
+            transform: scale(1.1);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2><i class="fa fa-link" aria-hidden="true"></i> أهم الروابط</h2>
+    <div class="underline"></div>
+    
+    <a class="btn" href="file1.pdf" download>
+        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+        تحميل الملف الأول
+    </a>
+    
+    <a class="btn" href="file2.pdf" download>
+        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+        تحميل الملف الثاني
+    </a>
+    
+    <a class="btn" href="file3.pdf" download>
+        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+        تحميل الملف الثالث
+    </a>
+</div>
+
+</body>
+</html>
