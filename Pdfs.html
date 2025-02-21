@@ -3,99 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أهم الروابط - تحميل ملفات PDF</title>
+    <title>روابط التحميل - ملفات PDF</title>
     <!-- Font Awesome for PDF icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- CSS Styles -->
+    <!-- Link for Cairo font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            direction: rtl;
-            user-select: none;
+            font-family: 'Cairo', sans-serif;
+            color: rgba(48, 69, 92, 0.8); /* نص داكن */
+            background-color: #FFFFFF; /* لون خلفية بيضاء */
+            padding: 10px;
+            user-select: none; /* Disable text selection */
+            -webkit-user-select: none; /* Chrome/Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+ */
+        }
+        .box {
             text-align: center;
+            margin-top: 20px;
+            user-select: none;
         }
-
-        .container {
-            margin: 50px auto;
+        h2 {
+            color: #4A3CAA; /* لون بنفسجي غامق */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px; /* Reduce space between the title and the line */
+        }
+        .line {
+            height: 2px;
+            background-color: #4A3CAA; /* لون الخط */
             width: 80%;
-            max-width: 600px;
+            margin: 5px auto; /* Reduce space between line and buttons */
         }
-
-        .container h2 {
-            font-size: 24px;
-            color: #333;
+        .button {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 5px;
-        }
-
-        .container h2 i {
-            margin-left: 8px;
-        }
-
-        .underline {
-            border-bottom: 3px solid #d6a2e8;
-            width: 100px;
-            margin: auto;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: bold;
+            justify-content: center; /* Center the text */
+            align-items: center; /* Center the text vertically */
+            background-color: #4A3CAA; /* لون الخلفية بنفسجي غامق */
             color: white;
-            background-color: #d6a2e8;
-            border: none;
-            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 10px auto; /* Center the buttons */
             text-decoration: none;
-            margin: 10px auto;
+            border-radius: 5px;
+            font-size: 18px;
             width: 250px;
             transition: background-color 0.3s ease, transform 0.3s ease;
+            user-select: none; /* Prevent text selection */
         }
-
-        .btn i {
-            margin-left: 8px;
-            font-size: 20px;
+        .button:hover {
+            background-color: #3B3196; /* لون الخلفية عند التمرير */
+            transform: scale(1.05); /* Animation for hover */
+            user-select: none;
         }
-
-        .btn:hover {
-            background-color: #b593d6;
-            transform: scale(1.1);
+        .button i {
+            margin-left: 8px; /* Push icon to the right */
+            user-select: none;
         }
-
-        .btn:active {
-            transform: scale(0.95);
+        .fa-file-pdf-o {
+            margin-left: 8px; /* Push icon to the right */
+            user-select: none;
+        }
+        .fa-link {
+            margin-left: 8px; /* Push icon to the right of the title */
+            user-select: none;
         }
     </style>
+    
 </head>
 <body>
 
-<div class="container">
-    <h2><i class="fa fa-link" aria-hidden="true"></i> أهم الروابط</h2>
-    <div class="underline"></div>
-    
-    <a class="btn" href="file1.pdf" download>
-        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-        تحميل الملف الأول
-    </a>
-    
-    <a class="btn" href="file2.pdf" download>
-        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-        تحميل الملف الثاني
-    </a>
-    
-    <a class="btn" href="file3.pdf" download>
-        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-        تحميل الملف الثالث
-    </a>
+<div class="box">
+  <h2>روابط التحميل <i class="fa fa-link" aria-hidden="true"></i></h2>
+  <div class="line"></div>
+  
+  <a class="button" href="file1.pdf" download>
+    تنزيل الملف الأول
+    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+  </a>
+  
+  <a class="button" href="file2.pdf" download>
+    تنزيل الملف الثاني
+    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+  </a>
+  
+  <a class="button" href="file3.pdf" download>
+    تنزيل الملف الثالث
+    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+  </a>
+  
 </div>
 
 </body>
