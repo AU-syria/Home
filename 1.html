@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Accordion</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Titillium+Web:300,700,300italic'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      color: rgba(48, 69, 92, 0.8);
+      background-color: #dce7eb;
+      padding: 10px;
+      user-select: none; /* For most modern browsers */
+            -webkit-user-select: none; /* For Chrome, Safari, and Opera */
+            -moz-user-select: none; /* For Firefox */
+            -ms-user-select: none; 
+        
+    }
+
+    h1, h2 {
+      color: #6558d3;
+      font-size: 14px;
+      text-align: right;
+      
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 24px;
+      text-align: right;
+      
+    }
+    h1 {
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /* إخفاء اللون عند النقر الطويل */
+}
+
+    ul {
+      padding: 0;
+      margin: 0;
+    }
+
+    ul li {
+      list-style: none;
+      margin-bottom: 10px;
+      border: 1px solid #dce7eb;
+      border-radius: 5px;
+      overflow: hidden;
+      transition: all 0.8s ease; /* Add smooth transition */
+      /* Prevent text selection */
+    }
+
+    ul li h1 {
+      background-color: #fefffa;
+      padding: 15px;
+      margin: 0;
+      cursor: pointer;
+      border-bottom: 1px solid #dce7eb;
+      transition: all 0.3s ease; /* Add smooth transition */
+    }
+
+    ul li h1::after {
+      content: '▼'; /* Add down arrow by default */
+      display: inline-block;
+      float: left;
+      margin-right: 10px;
+      transition: all 0.3s ease; /* Add smooth transition */
+    }
+
+    ul li p {
+      padding: 15px;
+      margin: 0;
+      display: none; /* Initially hide the paragraphs */
+      background-color: #ffffff; /* White background for paragraphs */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
+      transition: all 0.3s ease; /* Add smooth transition */
+    }
+
+    ul li.active {
+      margin-bottom: 20px; /* Increase margin when paragraph is visible */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+    }
+
+    ul li.active h1 {
+      background-color: #f0f7f9; /* Change background color when paragraph is visible */
+    }
+
+    ul li.active h1::after {
+      transform: rotate(180deg); /* Rotate arrow when paragraph is visible */
+    }
+
+    ul li.active p {
+      display: block; /* Show paragraph when active */
+    }
+  </style>
+</head>
+<body>
+  <h2>CSS + HTML only Accordion Element</h2>
+  <ul>
+    <li>
+      <h1 onclick="toggleParagraph(this)">Languages Used</h1>
+      <p>This page was written in HTML and CSS. The CSS was compiled from SASS. I used Normalize as my CSS reset and -prefix-free to save myself some headaches. I haven't quite gotten the hang of Slim for compiling into HTML, but someday I'll use it since its syntax compliments that of SASS. Regardless, this could all be done in plain HTML and CSS.</p>
+    </li>
+    <li>
+      <h1 onclick="toggleParagraph(this)">How it Works</h1>
+      <p>Using the sibling and checked selectors, we can determine the styling of sibling elements based on the checked state of the checkbox input element. One use, as demonstrated here, is an entirely CSS and HTML accordion element. Media queries are used to make the element responsive to different screen sizes.</p>
+    </li>
+    
+    
+    <li>
+      <h1 onclick="toggleParagraph(this)">الإنذارات الأكاديمية و الفصل من الجامعة</h1>
+      <p>الإنذارات الأكاديمية:
+
+بإختصار: اذا كان معدلك التراكمي تحت ال (2 أو 60%) بنهاية الفصل الاول او التاني (الصيفي ما محسوب) بيتوجهلك إنذار اكاديمي / عندك الفصلين الي بعد الإنذار ترفع المعدل فوق ال (2 أو 60%) و اذا ما ارتفع المعدل فوق هذا الحد تفصل
+
+- بعد اعتماد النتائج الأكاديمية لكل طالب في نهاية كل فصل دراسي، عدا الفصل الصيفي، تتولى الجامعة توجيه الإنذارات الأكاديمية للطلاب الذين يقل معدلهم التراكمي على (2) في أي من الفصلين الأول أو الثاني.
+
+- على الطالب الذي وجه إليه انذار أكاديمي، رفعه إلى (2) خلال مدة أقصاها فصلان من تاريخ الانذار
+
+- في حال لم يتمكن الطالب المنذر من رفع معدله التراكمي إلى (2) خلال المهلة المعطاة يفصل من التخصص، إلا إذا:
+1- أتم بنجاح (99) ساعة معتمدة وكان معدله التراكمي أكبر من (1.75)
+2- في حال تدنى معدل الطالب إلى أقل من (1.75) في اي فصل لاحق يفصل من الاختصاص من دون انذار.
+      		</p>
+      	</li>
+  </ul>
+  <h1>CSS + HTML only Accordion Element</h1>
+  <ul>
+    <li>
+      <h1 onclick="toggleParagraph(this)">Languages Used</h1>
+      <p>This page was written in HTML and CSS. The CSS was compiled from SASS. I used Normalize as my CSS reset and -prefix-free to save myself some headaches. I haven't quite gotten the hang of Slim for compiling into HTML, but someday I'll use it since its syntax compliments that of SASS. Regardless, this could all be done in plain HTML and CSS.</p>
+    </li>
+    <li>
+      <h1 onclick="toggleParagraph(this)">How it Works</h1>
+      <p>Using the sibling and checked selectors, we can determine the styling of sibling elements based on the checked state of the checkbox input element. One use, as demonstrated here, is an entirely CSS and HTML accordion element. Media queries are used to make the element responsive to different screen sizes.</p>
+    </li>
+    
+    
+    <li>
+      <h1 onclick="toggleParagraph(this)">الإنذارات الأكاديمية و الفصل من الجامعة</h1>
+      <p>الإنذارات الأكاديمية:
+
+بإختصار: اذا كان معدلك التراكمي تحت ال (2 أو 60%) بنهاية الفصل الاول او التاني (الصيفي ما محسوب) بيتوجهلك إنذار اكاديمي / عندك الفصلين الي بعد الإنذار ترفع المعدل فوق ال (2 أو 60%) و اذا ما ارتفع المعدل فوق هذا الحد تفصل
+
+- بعد اعتماد النتائج الأكاديمية لكل طالب في نهاية كل فصل دراسي، عدا الفصل الصيفي، تتولى الجامعة توجيه الإنذارات الأكاديمية للطلاب الذين يقل معدلهم التراكمي على (2) في أي من الفصلين الأول أو الثاني.
+
+- على الطالب الذي وجه إليه انذار أكاديمي، رفعه إلى (2) خلال مدة أقصاها فصلان من تاريخ الانذار
+
+- في حال لم يتمكن الطالب المنذر من رفع معدله التراكمي إلى (2) خلال المهلة المعطاة يفصل من التخصص، إلا إذا:
+1- أتم بنجاح (99) ساعة معتمدة وكان معدله التراكمي أكبر من (1.75)
+2- في حال تدنى معدل الطالب إلى أقل من (1.75) في اي فصل لاحق يفصل من الاختصاص من دون انذار.
+      		</p>
+      	</li>
+  </ul>
+  <h1>CSS + HTML only Accordion Element</h1>
+  <ul>
+    <li>
+      <h1 onclick="toggleParagraph(this)">Languages Used</h1>
+      <p>This page was written in HTML and CSS. The CSS was compiled from SASS. I used Normalize as my CSS reset and -prefix-free to save myself some headaches. I haven't quite gotten the hang of Slim for compiling into HTML, but someday I'll use it since its syntax compliments that of SASS. Regardless, this could all be done in plain HTML and CSS.</p>
+    </li>
+    <li>
+      <h1 onclick="toggleParagraph(this)">How it Works</h1>
+      <p>Using the sibling and checked selectors, we can determine the styling of sibling elements based on the checked state of the checkbox input element. One use, as demonstrated here, is an entirely CSS and HTML accordion element. Media queries are used to make the element responsive to different screen sizes.</p>
+    </li>
+    
+    
+    <li>
+      <h1 onclick="toggleParagraph(this)">الإنذارات الأكاديمية و الفصل من الجامعة</h1>
+      <p>الإنذارات الأكاديمية:
+
+بإختصار: اذا كان معدلك التراكمي تحت ال (2 أو 60%) بنهاية الفصل الاول او التاني (الصيفي ما محسوب) بيتوجهلك إنذار اكاديمي / عندك الفصلين الي بعد الإنذار ترفع المعدل فوق ال (2 أو 60%) و اذا ما ارتفع المعدل فوق هذا الحد تفصل
+
+- بعد اعتماد النتائج الأكاديمية لكل طالب في نهاية كل فصل دراسي، عدا الفصل الصيفي، تتولى الجامعة توجيه الإنذارات الأكاديمية للطلاب الذين يقل معدلهم التراكمي على (2) في أي من الفصلين الأول أو الثاني.
+
+- على الطالب الذي وجه إليه انذار أكاديمي، رفعه إلى (2) خلال مدة أقصاها فصلان من تاريخ الانذار
+
+- في حال لم يتمكن الطالب المنذر من رفع معدله التراكمي إلى (2) خلال المهلة المعطاة يفصل من التخصص، إلا إذا:
+1- أتم بنجاح (99) ساعة معتمدة وكان معدله التراكمي أكبر من (1.75)
+2- في حال تدنى معدل الطالب إلى أقل من (1.75) في اي فصل لاحق يفصل من الاختصاص من دون انذار.
+      		</p>
+      	</li>
+  </ul>
+  <h1>CSS + HTML only Accordion Element</h1>
+  <ul>
+    <li>
+      <h1 onclick="toggleParagraph(this)">Languages Used</h1>
+      <p>This page was written in HTML and CSS. The CSS was compiled from SASS. I used Normalize as my CSS reset and -prefix-free to save myself some headaches. I haven't quite gotten the hang of Slim for compiling into HTML, but someday I'll use it since its syntax compliments that of SASS. Regardless, this could all be done in plain HTML and CSS.</p>
+    </li>
+    <li>
+      <h1 onclick="toggleParagraph(this)">How it Works</h1>
+      <p>Using the sibling and checked selectors, we can determine the styling of sibling elements based on the checked state of the checkbox input element. One use, as demonstrated here, is an entirely CSS and HTML accordion element. Media queries are used to make the element responsive to different screen sizes.</p>
+    </li>
+    
+    
+    <li>
+      <h1 onclick="toggleParagraph(this)">الإنذارات الأكاديمية و الفصل من الجامعة</h1>
+      <p>الإنذارات الأكاديمية:
+
+بإختصار: اذا كان معدلك التراكمي تحت ال (2 أو 60%) بنهاية الفصل الاول او التاني (الصيفي ما محسوب) بيتوجهلك إنذار اكاديمي / عندك الفصلين الي بعد الإنذار ترفع المعدل فوق ال (2 أو 60%) و اذا ما ارتفع المعدل فوق هذا الحد تفصل
+
+- بعد اعتماد النتائج الأكاديمية لكل طالب في نهاية كل فصل دراسي، عدا الفصل الصيفي، تتولى الجامعة توجيه الإنذارات الأكاديمية للطلاب الذين يقل معدلهم التراكمي على (2) في أي من الفصلين الأول أو الثاني.
+
+- على الطالب الذي وجه إليه انذار أكاديمي، رفعه إلى (2) خلال مدة أقصاها فصلان من تاريخ الانذار
+
+- في حال لم يتمكن الطالب المنذر من رفع معدله التراكمي إلى (2) خلال المهلة المعطاة يفصل من التخصص، إلا إذا:
+1- أتم بنجاح (99) ساعة معتمدة وكان معدله التراكمي أكبر من (1.75)
+2- في حال تدنى معدل الطالب إلى أقل من (1.75) في اي فصل لاحق يفصل من الاختصاص من دون انذار.
+      		</p>
+      	</li>
+  </ul>
+  <h1>CSS + HTML only Accordion Element</h1>
+  <ul>
+    <li>
+      <h1 onclick="toggleParagraph(this)">Languages Used</h1>
+      <p>This page was written in HTML and CSS. The CSS was compiled from SASS. I used Normalize as my CSS reset and -prefix-free to save myself some headaches. I haven't quite gotten the hang of Slim for compiling into HTML, but someday I'll use it since its syntax compliments that of SASS. Regardless, this could all be done in plain HTML and CSS.</p>
+    </li>
+    <li>
+      <h1 onclick="toggleParagraph(this)">How it Works</h1>
+      <p>Using the sibling and checked selectors, we can determine the styling of sibling elements based on the checked state of the checkbox input element. One use, as demonstrated here, is an entirely CSS and HTML accordion element. Media queries are used to make the element responsive to different screen sizes.</p>
+    </li>
+    
+    
+    <li>
+      <h1 onclick="toggleParagraph(this)">الإنذارات الأكاديمية و الفصل من الجامعة</h1>
+      <p>الإنذارات الأكاديمية:
+
+بإختصار: اذا كان معدلك التراكمي تحت ال (2 أو 60%) بنهاية الفصل الاول او التاني (الصيفي ما محسوب) بيتوجهلك إنذار اكاديمي / عندك الفصلين الي بعد الإنذار ترفع المعدل فوق ال (2 أو 60%) و اذا ما ارتفع المعدل فوق هذا الحد تفصل
+
+- بعد اعتماد النتائج الأكاديمية لكل طالب في نهاية كل فصل دراسي، عدا الفصل الصيفي، تتولى الجامعة توجيه الإنذارات الأكاديمية للطلاب الذين يقل معدلهم التراكمي على (2) في أي من الفصلين الأول أو الثاني.
+
+- على الطالب الذي وجه إليه انذار أكاديمي، رفعه إلى (2) خلال مدة أقصاها فصلان من تاريخ الانذار
+
+- في حال لم يتمكن الطالب المنذر من رفع معدله التراكمي إلى (2) خلال المهلة المعطاة يفصل من التخصص، إلا إذا:
+1- أتم بنجاح (99) ساعة معتمدة وكان معدله التراكمي أكبر من (1.75)
+2- في حال تدنى معدل الطالب إلى أقل من (1.75) في اي فصل لاحق يفصل من الاختصاص من دون انذار.
+      		</p>
+      	</li>
+  </ul>
+  <h1>CSS + HTML only Accordion Element</h1>
+  <ul>
+    <li>
+      <h1 onclick="toggleParagraph(this)">Languages Used</h1>
+      <p>This page was written in HTML and CSS. The CSS was compiled from SASS. I used Normalize as my CSS reset and -prefix-free to save myself some headaches. I haven't quite gotten the hang of Slim for compiling into HTML, but someday I'll use it since its syntax compliments that of SASS. Regardless, this could all be done in plain HTML and CSS.</p>
+    </li>
+    <li>
+      <h1 onclick="toggleParagraph(this)">How it Works</h1>
+      <p>Using the sibling and checked selectors, we can determine the styling of sibling elements based on the checked state of the checkbox input element. One use, as demonstrated here, is an entirely CSS and HTML accordion element. Media queries are used to make the element responsive to different screen sizes.</p>
+    </li>
+    
+    
+    <li>
+      <h1 onclick="toggleParagraph(this)">الإنذارات الأكاديمية و الفصل من الجامعة</h1>
+      <p>الإنذارات الأكاديمية:
+
+بإختصار: اذا كان معدلك التراكمي تحت ال (2 أو 60%) بنهاية الفصل الاول او التاني (الصيفي ما محسوب) بيتوجهلك إنذار اكاديمي / عندك الفصلين الي بعد الإنذار ترفع المعدل فوق ال (2 أو 60%) و اذا ما ارتفع المعدل فوق هذا الحد تفصل
+
+- بعد اعتماد النتائج الأكاديمية لكل طالب في نهاية كل فصل دراسي، عدا الفصل الصيفي، تتولى الجامعة توجيه الإنذارات الأكاديمية للطلاب الذين يقل معدلهم التراكمي على (2) في أي من الفصلين الأول أو الثاني.
+
+- على الطالب الذي وجه إليه انذار أكاديمي، رفعه إلى (2) خلال مدة أقصاها فصلان من تاريخ الانذار
+
+- في حال لم يتمكن الطالب المنذر من رفع معدله التراكمي إلى (2) خلال المهلة المعطاة يفصل من التخصص، إلا إذا:
+1- أتم بنجاح (99) ساعة معتمدة وكان معدله التراكمي أكبر من (1.75)
+2- في حال تدنى معدل الطالب إلى أقل من (1.75) في اي فصل لاحق يفصل من الاختصاص من دون انذار.
+      		</p>
+      	</li>
+  </ul>
+  
+  <script>
+    function toggleParagraph(element) {
+      // Toggle the active class for the parent list item
+      element.parentNode.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
