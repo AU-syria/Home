@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مربع استدعاء المعلومات</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background-color: #f9f9f9;
+      text-align: right;
+      overflow: hidden; /* منع التمرير */
+      user-select: none; /* منع تحديد النص */
+    }
+    .container {
+      position: relative;
+      margin: 1rem auto;
+      padding: 1rem;
+      max-width: 800px; /* تحديد العرض الأقصى */
+      min-height: calc(100vh - 4rem);
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+    p, ul {
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      direction: rtl;
+      margin: 10px 0;
+      transition: background-color 0.3s, transform 0.3s; /* إضافة انتقال */
+    }
+    p.tldr, ul.tldr, p.info {
+      background-color: rgba(65, 51, 183, 0.1);
+    }
+    ul li {
+      margin-right: 20px;
+    }
+    ul.tldr li a {
+      text-decoration: none; /* إزالة الخط السفلي */
+      color: #4133B7; /* لون النص */
+      cursor: pointer; /* تغيير المؤشر عند المرور */
+    }
+    ul.tldr li a:hover {
+      text-decoration: underline; /* إضافة خط تحت الرابط عند التمرير */
+    }
+    ul.tldr li a:focus, ul.tldr li a:active {
+      outline: none; /* إزالة اللون الأزرق عند النقر أو التركيز */
+    }
+    .tldr .icon, .info .icon {
+      margin-left: 5px;
+      font-weight: bolder;
+      color: #4133B7;
+    }
+    .footer {
+      position: absolute;
+      bottom: -2.25rem;
+      width: 100%;
+      text-align: center;
+    }
+    .footer a {
+      color: #4133B7;
+      text-decoration: none;
+      outline: none; /* إزالة الإطار الأزرق عند النقر */
+    }
+    .footer a:focus, .footer a:active {
+      outline: none; /* إزالة تأثير اللون الأزرق عند التركيز أو النقر */
+      box-shadow: none; /* إلغاء أي تأثير ظل أو لون */
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    .clicked {
+      background-color: #ddd; /* لون الخلفية عند النقر */
+      transform: scale(1.05); /* تكبير طفيف عند النقر */
+    }
+    @media (min-width: 576px) {
+      p, ul {
+        width: 75%;
+      }
+    }
+    @media (min-width: 768px) {
+      p, ul {
+        width: 50%;
+      }
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;"> <!-- منع القائمة المنبثقة -->
+<div class="container">
+  <p class="info">إن هذا الموقع لا علاقة له باتحاد الطلبة ولا جامعة الأندلس، وهو مأخوذ من كافة المصادر الرسمية.</p>
+  <ul class="tldr">
+    <li><a href="#link1">النقطة الأولى المهمة.</a></li>
+    <li><a href="#link2">النقطة الثانية المهمة.</a></li>
+    <li><a href="#link3">النقطة الثالثة المهمة.</a></li>
+  </ul>
+  <div class="footer">
+    <a href="https://codepen.io/Ian-Waldron" target="_blank">Designed</a> By <a href="https://ianwaldron.com" target="_blank">Dr Ayham Hamchado</a>
+  </div>
+</div>
+<script>
+  const tldrContent = '<i class="fa fa-bolt"></i>أحدث الإعلانات:';
+  const infoContent = '<i class="fa fa-info-circle"></i>معلومات:';
+
+  const targets = document.querySelectorAll('.tldr, .info');
+
+  targets.forEach(parent => {
+    const child = document.createElement('span');
+    child.classList.add('icon');
+    if (parent.classList.contains('tldr')) {
+      child.innerHTML = tldrContent;
+      parent.prepend(child);
+    } else if (parent.classList.contains('info')) {
+      child.innerHTML = infoContent;
+      parent.prepend(child);
+    }
+
+    parent.addEventListener('click', () => {
+      parent.classList.add('clicked');
+      setTimeout(() => parent.classList.remove('clicked'), 200);
+    });
+  });
+</script>
+</body>
+</html>
