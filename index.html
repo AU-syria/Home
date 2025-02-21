@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>App Bar with iframe</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    font-family: 'Cairo', sans-serif;
+    margin: 0;
+    padding: 0;
+    user-select: none; /* For most modern browsers */
+            -webkit-user-select: none; /* For Chrome, Safari, and Opera */
+            -moz-user-select: none; /* For Firefox */
+            -ms-user-select: none; 
+  }
+
+  .app-bar {
+  background-color: #6558d3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.menu-toggle {
+  background-color: #6558d3;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 8px;
+  text-align: center;
+  order: 2;
+}
+
+.menu-toggle img {
+  width: 24px;
+  height: 24px;
+}   
+
+.menu-toggle:hover {
+  background-color: #6558d3;
+}
+
+
+.menu-item {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0 7px;
+  padding: 10px 1px;
+  transition: background-color 0.3s;
+  display: none;
+}
+
+  .menu-item:hover {
+    background-color: #4133B7;
+  }
+
+  .menu-item.selected {
+    border: 2px solid #4133B7;
+    padding: 6px 10px; /* Adjust padding to keep the size consistent */
+  }
+
+  .app-bar.active {
+  flex-direction: column-reverse; /* تغيير الاتجاه إلى عمود مع عرض الأزرار أسفل الزر */
+  align-items: flex-start; /* محاذاة العناصر إلى البداية */
+}
+
+
+
+.app-bar .menu-item {
+    font-size: 16px; /* حجم الخط لعناصر القائمة */
+    font-family: 'Cairo', sans-serif;
+  }
+
+
+
+.app-bar.active .menu-item {
+  font-family: 'Cairo', sans-serif;
+
+  display: block; /* إظهار عناصر القائمة عندما تكون القائمة نشطة */
+  width: 100%; /* عرض كامل للهواتف المحمولة */
+  margin: 5px 0; /* هامش بين عناصر القائمة للهواتف المحمولة */
+}
+
+  .app-bar.active .menu-item {
+  display: block; /* Show menu items when menu is active */
+  width: 100%; /* Full width for mobile */
+  margin: 5px 0; /* Margin between menu items for mobile */
+  align-self: flex-end; /* Align items at the bottom */
+}
+
+.app-bar.active .menu-toggle {
+  align-self: flex-end;
+}
+
+.divider {
+  width: 1px; /* تحديد عرض الخط */
+  height: auto; /* يتم تعيين الارتفاع تلقائيًا لأنه سيكون بنفس ارتفاع الزر*/
+  background-color: rgba(255, 255, 255, 0.2); /* تعديل لون الخط حسب الضرورة */
+  margin: 0 10px; /* المسافة بين الخط والزر */
+}
+
+
+  .page-title {
+    color: white;
+    font-size: 38px;
+    padding: 8px 12px;
+    text-align: center;
+    flex-grow: 1; /* Allow it to grow to take up available space */
+    order: 1; /* Ensure it stays in the center */
+    font-family: 'Cairo', sans-serif;
+  }
+
+  #content-frame {
+    border: none;
+    width: 100%;
+    height: calc(100vh - 50px); /* Full screen height minus app bar height */
+  }
+  @media (min-width: 600px) {
+  .page-title {
+    margin: 0 auto; /* Center the page title */
+    order: 0; /* Make sure it appears in the center */
+    font-family: 'Cairo', sans-serif;
+
+
+  }
+
+
+    .menu-item {
+      display: none; /* Show inline for larger screens */
+      margin: 0 10px; /* Margin for larger screens */
+      width: auto; /* Auto width for larger screens */
+    }
+
+    .page-title {
+      margin: 0 auto; /* Center the page title */
+      order: 0; /* Make sure it appears in the center */
+      font-family: 'Cairo', sans-serif;
+
+    }
+
+
+
+
+
+  }
+</style>
+</head>
+<body>
+  <div class="app-bar">
+    <span id="page-title" class="page-title"> </span>
+    <button class="menu-toggle" id="menuButton" onclick="toggleMenu()">
+      <img id="menuIcon" src="image/menu.png" alt="Menu Icon" />
+  </button>
+  
+  <script>
+  function toggleMenu() {
+      var menuIcon = document.getElementById("menuIcon");
+      var currentSrc = menuIcon.getAttribute('src');
+      if (currentSrc.includes("menu.png")) {
+          menuIcon.setAttribute('src', 'image/close.png');
+      } else {
+          menuIcon.setAttribute('src', 'image/menu.png');
+      }
+  }
+  </script>
+  
+    
+    <!-- Menu Items -->
+     <button class="menu-item" onclick="loadPage('data.html', this); hideMenu()">أسئلة شائعة</button>
+    <div class="divider"></div>
+    <button class="menu-item" onclick="loadPage('aboutus.html', this); hideMenu()">عن المصمم</button>
+    <div class="divider"></div>
+    <button class="menu-item" onclick="loadPage('chat.html', this); hideMenu()">راسل المصمم</button>
+    <div class="divider"></div>
+    <button class="menu-item" onclick="loadPage('loading.html', this); hideMenu()">الاعتراضات</button>
+    <div class="divider"></div>
+    <button class="menu-item" onclick="loadPage('dentistry.html', this); hideMenu()">الاستبيانات</button>
+
+    <div class="divider"></div>
+    <button class="menu-item" onclick="loadPage('Sections.html', this); hideMenu()">الأقسام</button>
+  </div>
+  
+
+
+<iframe id="content-frame" src="user.html" ></iframe>
+
+
+
+
+
+<script>
+function toggleMenu() {
+  var appBar = document.querySelector('.app-bar');
+  var menuToggle = document.querySelector('.menu-toggle');
+
+  appBar.classList.toggle('active');
+
+  if (appBar.classList.contains('active')) {
+    menuToggle.classList.add('active');
+  } else {
+    menuToggle.classList.remove('active');
+  }
+}
+
+
+function loadPage(url, element) {
+    document.getElementById('content-frame').src = url;
+
+    // Remove 'selected' class from all menu items
+    var menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach(function(item) {
+        item.classList.remove('selected');
+    });
+
+    // Add 'selected' class to the clicked menu item
+    element.classList.add('selected');
+}
+
+
+  function hideMenu() {
+    document.querySelector('.app-bar').classList.remove('active');
+  }
+</script>
+</body>
+  </html>
