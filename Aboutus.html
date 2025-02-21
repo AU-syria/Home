@@ -160,18 +160,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
-        function showRandomImage() {
-            fetch('https://randomuser.me/api/')
-                .then(response => response.json())
-                .then(data => {
-                    const imageUrl = data.results[0].picture.large;
-                    document.getElementById('profile-picture').src = imageUrl;
-                })
-                .catch(error => {
-                    console.error('حدث خطأ في تحميل الصورة:', error);
-                });
-        }
-
         function showAlert(socialMedia) {
             Swal.fire({
                 title: `تم النقر على ${socialMedia}`,
