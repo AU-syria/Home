@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عدد الزيارات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .visit-count {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .visit-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .visit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>عدد الزيارات إلى الصفحة</h1>
+    <div class="visit-count" id="visit-count">جاري تحميل العدد...</div>
+
+    <button class="visit-button" id="update-visit-btn">زيادة الزيارة</button>
+
+    <script>
+        // قراءة عدد الزيارات من GitHub API
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('https://api.github.com/repos/AU-syria/Home/contents/visits.json')
+                .then(response => response.json())
+                .then(data => {
+                    const content = atob(data.content);  // فك تشفير البيانات التي تم الحصول عليها من GitHub API
+                    const jsonData = JSON.parse(content);
+                    document.getElementById('visit-count').innerText = `عدد الزيارات: ${jsonData.visits}`;
+                })
+                .catch(error => {
+                    console.error('حدث خطأ أثناء تحميل البيانات:', error);
+                    document.getElementById('visit-count').innerText = 'حدث خطأ في تحميل البيانات.';
+                });
+        });
+
+        // تحديث عدد الزيارات عند النقر على الزر
+        document.getElementById('update-visit-btn').addEventListener('click', function() {
+            fetch('https://api.github.com/repos/AU-syria/Home/contents/visits.json', {
+                method: 'PUT',
+                headers: {
+                    'Authorization': 'Bearer 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',  // التوكن الخاص بك
+                    'Accept': 'application/vnd.github.v3+json'
+                },
+                body: JSON.stringify({
+                    message: 'زيادة عدد الزيارات',
+                    content: btoa(JSON.stringify({
+                        visits: Math.floor(Math.random() * 1000) + 1  // تحديد عدد الزيارات الجديد عشوائيًا
+                    })),
+                    sha: '311c7f085549aa82f06c90654c016d93af476426'  // استخدم الـ SHA الذي حصلت عليه
+                })
+            }).then(response => response.json())
+              .then(data => {
+                alert('تم تحديث العدد بنجاح!');
+                location.reload();  // إعادة تحميل الصفحة بعد التحديث
+              }).catch(error => {
+                alert('حدث خطأ أثناء التحديث!');
+              });
+        });
+    </script>
+
+</body>
+</html>
