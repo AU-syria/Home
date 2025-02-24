@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحليل المقررات وتوليد جدول دوام</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            direction: rtl;
+            text-align: right;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        select, input[type="file"] {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 200px;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 200px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        h2 {
+            color: #007BFF;
+        }
+
+        p {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+        }
+
+        .copy-btn {
+            margin-top: 10px;
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            table-layout: fixed;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+            word-wrap: break-word;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        .select-group-btn {
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .select-group-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .group-select {
+            width: 100%;
+            padding: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>تحليل المقررات وتوليد جدول دوام</h1>
+
+    <input type="file" id="fileInput" accept=".json" onchange="loadCourses()">
+    <select id="courseSelect" multiple size="10" style="width: 100%; display: none;"></select>
+    <button id="generateScheduleBtn" style="display: none;" onclick="generateSchedule()">توليد جدول الدوام</button>
+
+    <div id="output" class="result"></div>
+
+    <script>
+        let coursesData = [];
+
+        // تحميل المقررات من ملف JSON
+        function loadCourses() {
+            let fileInput = document.getElementById('fileInput');
+            let file = fileInput.files[0];
+
+            if (!file) {
+                document.getElementById('output').innerHTML = "<p class='error'>يرجى اختيار ملف JSON.</p>";
+                return;
+            }
+
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    coursesData = JSON.parse(event.target.result).courses;
+                    populateCourseSelect(coursesData);
+                } catch (e) {
+                    document.getElementById('output').innerHTML = "<p class='error'>حدث خطأ أثناء التحليل. تأكد من أن الملف يحتوي على JSON صالح.</p>";
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // ملء قائمة المواد لاختيارها
+        function populateCourseSelect(courses) {
+            let courseSelect = document.getElementById('courseSelect');
+            courseSelect.style.display = 'block';
+            document.getElementById('generateScheduleBtn').style.display = 'block';
+
+            courseSelect.innerHTML = ''; // تنظيف القائمة السابقة
+            courses.forEach((course, index) => {
+                let option = document.createElement('option');
+                option.value = index;
+                option.text = course.course_name;
+                courseSelect.appendChild(option);
+            });
+        }
+
+        // توليد جدول الدوام بناءً على المواد المختارة
+        function generateSchedule() {
+            let selectedOptions = Array.from(document.getElementById('courseSelect').selectedOptions);
+            if (selectedOptions.length === 0) {
+                document.getElementById('output').innerHTML = "<p class='error'>يرجى اختيار مادة واحدة على الأقل.</p>";
+                return;
+            }
+
+            let outputHTML = '';
+
+            selectedOptions.forEach(option => {
+                let course = coursesData[option.value];
+                let courseName = course.course_name;
+                let courseId = course.course_id;
+                let theoreticalGroups = course.course_groups_t;
+                let practicalGroups = course.course_groups_p;
+
+                outputHTML += `<h2>مقرر: ${courseName} (ID: ${courseId})</h2>`;
+
+                // اختيار مجموعة نظرية
+                outputHTML += `<label for="theoretical-group-${courseId}">المجموعة النظرية: </label>
+                    <select id="theoretical-group-${courseId}" class="group-select">
+                        <option value="">اختر مجموعة نظرية</option>`;
+                theoreticalGroups.forEach(group => {
+                    outputHTML += `<option value="${group.group_id}">${group.group_id} - ${group.students_count} طلاب</option>`;
+                });
+                outputHTML += `</select><br><br>`;
+
+                // اختيار مجموعة عملية
+                outputHTML += `<label for="practical-group-${courseId}">المجموعة العملية: </label>
+                    <select id="practical-group-${courseId}" class="group-select">
+                        <option value="">اختر مجموعة عملية</option>`;
+                practicalGroups.forEach(group => {
+                    outputHTML += `<option value="${group.group_id}">${group.group_id} - ${group.students_count} طلاب</option>`;
+                });
+                outputHTML += `</select><br><br>`;
+            });
+
+            outputHTML += '<button class="copy-btn" onclick="generateCode()">توليد الكود</button>';
+            document.getElementById('output').innerHTML = outputHTML;
+        }
+
+        // توليد الكود المطلوب ونسخه إلى الحافظة
+        function generateCode() {
+            let courseIds = [];
+            let tGroups = [];
+            let pGroups = [];
+
+            // جمع المجموعات المختارة
+            coursesData.forEach(course => {
+                let selectedTGroup = document.getElementById(`theoretical-group-${course.course_id}`).value;
+                let selectedPGroup = document.getElementById(`practical-group-${course.course_id}`).value;
+
+                // تحقق من أن المجموعة تم اختيارها
+                if (selectedTGroup) {
+                    tGroups.push(selectedTGroup);
+                }
+                if (selectedPGroup) {
+                    pGroups.push(selectedPGroup);
+                }
+                courseIds.push(course.course_id);
+            });
+
+            // التأكد من أن كل المجموعات تم اختيارها
+            if (tGroups.length === 0 || pGroups.length === 0) {
+                alert("يرجى اختيار مجموعات نظرية وعملية لكل مادة.");
+                return;
+            }
+
+            // إنشاء الرابط
+            let url = `https://my.au.edu.sy:450/api/students/registration/store-courses-request?requestType=REGISTER_REQUEST&courseId%5B%5D=${courseIds.join('&courseId%5B%5D=')}&tGroup%5B%5D=${tGroups.join('&tGroup%5B%5D=')}&pGroup%5B%5D=${pGroups.join('&pGroup%5B%5D=')}&cGroup%5B%5D=`;
+
+            // نسخ الكود إلى الحافظة
+            let tempInput = document.createElement('textarea');
+            tempInput.value = url;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert('تم نسخ الكود إلى الحافظة');
+        }
+    </script>
+
+</body>
+</html>
