@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .dashboard-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        p {
+            color: #555;
+            font-size: 16px;
+        }
+    </style>
+    <!-- إضافة مكتبة SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div id="content" class="dashboard-container" style="display: none;">
+        <h2>مرحبًا بك في لوحة التحكم</h2>
+        <p>هذه الصفحة تعمل فقط إذا تم التحقق من الرمز بنجاح.</p>
+    </div>
+
+    <script>
+        // التحقق من وجود القيمة 1 في الرابط
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+
+        if (status === "1") {
+            // إظهار المحتوى إذا كان الرمز صحيحًا
+            document.getElementById('content').style.display = 'block';
+        } else {
+            // إذا لم يكن الرمز صحيحًا، تبقى الصفحة فارغة
+            document.body.innerHTML = ''; // إزالة كل محتوى الصفحة
+        }
+    </script>
+</body>
+</html>
