@@ -38,14 +38,16 @@
     body {
       font-family: 'Cairo', sans-serif;
       direction: rtl;
-      font-size: 12px;
-      line-height: 1.5;
+      font-size: 14px;
+      line-height: 1.6;
       min-height: 100%;
       background-color: var(--c-ash);
       user-select: none;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
+      margin: 0;
+      padding: 0;
     }
 
     .cards {
@@ -53,26 +55,30 @@
       flex-wrap: wrap;
       align-items: flex-start;
       justify-content: center;
-      gap: 2.5rem;
+      gap: 2rem;
       width: 90%;
       max-width: 1000px;
-      margin: 10vh auto;
-      font-size: 15px;
-      font-family: 'Cairo', sans-serif;
+      margin: 5vh auto;
+      padding: 20px;
     }
 
     .card {
       border-radius: 16px;
-      box-shadow: 0 30px 30px -25px rgba(56, 142, 60, 0.25); /* أخضر داكن */
+      box-shadow: 0 10px 20px rgba(56, 142, 60, 0.1); /* ظل أخضر ناعم */
       max-width: 300px;
-      font-size: 15px;
-      font-family: 'Cairo', sans-serif;
+      background-color: var(--c-white);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(56, 142, 60, 0.2); /* ظل أخضر أقوى عند التمرير */
     }
 
     .information {
-      background-color: var(--c-white);
       padding: 1.5rem;
-      font-family: 'Cairo', sans-serif;
+      text-align: right;
     }
 
     .information .tag {
@@ -84,41 +90,20 @@
       padding: 0.5em 0.75em;
       line-height: 1;
       border-radius: 6px;
-      font-size: 15px;
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .information .tag + * {
-      margin-top: 1rem;
-      font-family: 'Cairo', sans-serif;
+      margin-bottom: 1rem;
     }
 
     .information .title {
       font-size: 1.5rem;
       color: var(--c-void);
       line-height: 1.25;
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .information .title + * {
-      margin-top: 1rem;
-      font-size: 10px;
-      font-family: 'Cairo', sans-serif;
+      margin-bottom: 1rem;
     }
 
     .information .info {
       color: var(--c-charcoal);
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .information .info + * {
-      margin-top: 1.25rem;
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .span {
-      direction: rtl;
-      animation-direction: alternate-reverse;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
     }
 
     .information .button {
@@ -127,173 +112,26 @@
       background-color: var(--c-white);
       border: 2px solid var(--c-indigo);
       color: var(--c-indigo);
-      padding: 0.5em 1em;
-      border-radius: 6px;
-      font-weight: 500;
+      padding: 0.75em 1.5em;
+      border-radius: 8px;
+      font-weight: 600;
       display: inline-flex;
       align-items: center;
       justify-content: space-between;
       gap: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .information .button:hover,
     .information .button:focus {
       background-color: var(--c-indigo);
-      font-family: 'Cairo', sans-serif;
       color: var(--c-white);
     }
 
-    .information .details {
-      display: flex;
-      font-family: 'Cairo', sans-serif;
-      gap: 1rem;
-    }
-
-    .information .details div {
-      padding: 0.75em 1em;
-      background-color: var(--c-titan-white);
-      border-radius: 8px;
-      display: flex;
-      flex-direction: column-reverse;
-      gap: 0.125em;
-      font-family: 'Cairo', sans-serif;
-      flex-basis: 50%;
-    }
-
-    .information .details dt {
-      font-size: 0.875rem;
-      color: var(--c-cold-purple);
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .information .details dd {
-      color: var(--c-indigo);
-      font-weight: 600;
-      font-size: 1.25rem;
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .plan {
-      padding: 10px;
-      background-color: var(--c-white);
-      font-family: 'Cairo', sans-serif;
-      color: var(--c-del-rio);
-    }
-
-    .plan strong {
-      font-weight: 600;
-      color: var(--c-coffee);
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .plan .inner {
-      padding: 20px;
-      padding-top: 40px;
-      background-color: var(--c-fair-pink);
-      font-family: 'Cairo', sans-serif;
-      border-radius: 12px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .plan .pricing {
-      position: absolute;
-      top: 0;
-      right: 0;
-      background-color: var(--c-apricot);
-      border-radius: 99em 0 0 99em;
-      display: flex;
-      align-items: center;
-      padding: 0.625em 0.75em;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--c-coffee);
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .plan .pricing small {
-      color: var(--c-del-rio);
-      font-size: 0.75em;
-      margin-left: 0.25em;
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .plan .title {
-      font-weight: 600;
-      font-size: 1.25rem;
-      color: var(--c-coffee);
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .plan .title + * {
-      margin-top: 0.75rem;
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .plan .info + * {
-      margin-top: 1rem;
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .plan .features {
-      display: flex;
-      font-family: 'Cairo', sans-serif;
-      flex-direction: column;
-    }
-
-    .plan .features li {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .plan .features li + * {
-      margin-top: 0.75rem;
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .plan .features .icon {
-      background-color: var(--c-java);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--c-white);
-      border-radius: 50%;
+    .information .button svg {
       width: 20px;
       height: 20px;
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .plan .features .icon svg {
-      width: 14px;
-      height: 14px;
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .plan .features + * {
-      margin-top: 1.25rem;
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .plan button {
-      font: inherit;
-      background-color: var(--c-indigo);
-      border-radius: 6px;
-      color: var(--c-white);
-      font-weight: 500;
-      font-size: 1.125rem;
-      width: 100%;
-      border: 0;
-      padding: 1em;
-      font-family: 'Cairo', sans-serif;
-      text-decoration: none;
-    }
-
-    .plan button:hover,
-    .plan button:focus {
-      background-color: var(--c-governor);
-      font-family: 'Cairo', sans-serif;
     }
 
     .swal2-popup {
@@ -352,8 +190,8 @@
       <article class="information card" id="p11Card1">
         <span class="tag">شؤون مالية وأكاديمية</span>
         <h3 class="title">لا تفوت اجتماعاتك الهامة أبدًا</h3>
-        <p id="وصف4">وصف الصفحة هنا</p>
-        <button id="زرالقائمة4" class="button" onclick="انتقالإلىصفحة()">
+        <p class="info">وصف الصفحة هنا</p>
+        <button class="button" onclick="انتقالإلىصفحة()">
           <span>معرفة المزيد</span>
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
             <path d="M0 0h24v24H0V0z" fill="none"/>
@@ -365,8 +203,8 @@
       <article class="information card" id="p11Card1">
         <span class="tag">شؤون مالية</span>
         <h3 class="title">التحويل للحساب الجامعي</h3>
-        <p id="وصف4">ستجد في هذا القسم طرق الدفع المتوفرة مع شرح تفصيلي عن طريقة إجرائها</p>
-        <button id="زرالقائمة4" class="button" onclick="إظهارتنبيه()">
+        <p class="info">ستجد في هذا القسم طرق الدفع المتوفرة مع شرح تفصيلي عن طريقة إجرائها</p>
+        <button class="button" onclick="إظهارتنبيه()">
           <span>معرفة المزيد</span>
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
             <path d="M0 0h24v24H0V0z" fill="none"/>
@@ -378,8 +216,8 @@
       <article class="information card" id="p11Card1">
         <span class="tag">شؤون أكاديمية</span>
         <h3 class="title">الإعلانات الجامعية</h3>
-        <p id="وصف4">ستجد في هذا القسم شرح مفصل عن الإعلانات الجامعية ومثال شامل بالإضافة إلى برمجية لحساب الإعلانات الخاصة بالطالب</p>
-        <button id="زرالقائمة4" class="button" onclick="إظهارتنبيه()">
+        <p class="info">ستجد في هذا القسم شرح مفصل عن الإعلانات الجامعية ومثال شامل بالإضافة إلى برمجية لحساب الإعلانات الخاصة بالطالب</p>
+        <button class="button" onclick="إظهارتنبيه()">
           <span>معرفة المزيد</span>
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
             <path d="M0 0h24v24H0V0z" fill="none"/>
