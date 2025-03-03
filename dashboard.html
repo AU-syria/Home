@@ -16,23 +16,66 @@
         }
 
         .dashboard-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 400px;
             text-align: center;
         }
 
         h2 {
-            margin-bottom: 20px;
+            margin-bottom: 40px;
             color: #333;
         }
 
-        p {
-            color: #555;
-            font-size: 16px;
+        .circle-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        .circle {
+            width: 80px;
+            height: 80px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            position: absolute;
+        }
+
+        .circle:hover {
+            background-color: #45a049;
+        }
+
+        .circle:nth-child(1) {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .circle:nth-child(2) {
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+        }
+
+        .circle:nth-child(3) {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .circle:nth-child(4) {
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
         }
     </style>
     <!-- إضافة مكتبة SweetAlert -->
@@ -40,8 +83,13 @@
 </head>
 <body>
     <div id="content" class="dashboard-container" style="display: none;">
-        <h2>مرحبًا بك في لوحة التحكم</h2>
-        <p>هذه الصفحة تعمل فقط إذا تم التحقق من الرمز بنجاح.</p>
+        <h2>لوحة التحكم - إدارة اللوائح</h2>
+        <div class="circle-container">
+            <div class="circle" onclick="navigate('create-list')">إنشاء لائحة جديدة</div>
+            <div class="circle" onclick="navigate('edit-list')">تعديل لائحة</div>
+            <div class="circle" onclick="navigate('add-products')">إضافة منتجات للائحة</div>
+            <div class="circle" onclick="navigate('publish-list')">تجهيز اللائحة للنشر</div>
+        </div>
     </div>
 
     <script>
@@ -55,6 +103,30 @@
         } else {
             // إذا لم يكن الرمز صحيحًا، تبقى الصفحة فارغة
             document.body.innerHTML = ''; // إزالة كل محتوى الصفحة
+        }
+
+        // دالة لتوجيه المستخدم بناءً على الخيار
+        function navigate(action) {
+            switch (action) {
+                case 'create-list':
+                    window.location.href = "create-list.html";
+                    break;
+                case 'edit-list':
+                    window.location.href = "edit-list.html";
+                    break;
+                case 'add-products':
+                    window.location.href = "add-products.html";
+                    break;
+                case 'publish-list':
+                    window.location.href = "publish-list.html";
+                    break;
+                default:
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'خطأ',
+                        text: 'حدث خطأ غير متوقع.',
+                    });
+            }
         }
     </script>
 </body>
