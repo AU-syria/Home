@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .logo img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #4CAF50;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50; /* لون أخضر فاتح */
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049; /* لون أخضر داكن عند التمرير */
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 20px;
+            }
+
+            .input-group input {
+                padding: 10px;
+            }
+
+            button {
+                padding: 10px;
+            }
+        }
+    </style>
+    <!-- إضافة مكتبة SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <img src="https://via.placeholder.com/100" alt="شعار الشركة">
+        </div>
+        <h2>تسجيل الدخول</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="password">أدخل رمز المرور:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">دخول</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const password = document.getElementById('password').value;
+
+            // كلمات المرور المقبولة
+            const validPasswords = ["1234", "abcd", "4321"];
+
+            if (validPasswords.includes(password)) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'تم تسجيل الدخول بنجاح!',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    // توجيه المستخدم إلى الصفحة التالية مع إضافة القيمة 1
+                    window.location.href = "dashboard.html?status=1";
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'رمز المرور غير صحيح',
+                    text: 'يرجى المحاولة مرة أخرى.',
+                });
+            }
+        });
+    </script>
+</body>
+</html>
